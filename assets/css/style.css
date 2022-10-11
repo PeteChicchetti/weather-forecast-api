@@ -1,0 +1,17 @@
+body {
+    border: 2px solid gray;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+header {
+    width: 100%;
+    background-image: linear-gradient(to right, rgb(17, 6, 180), rgb(49, 5, 90));
+    text-align: center;
+}
+
+h1 {
+    padding: 7px;
+    color: white;
+    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+}
