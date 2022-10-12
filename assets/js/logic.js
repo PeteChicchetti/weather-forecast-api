@@ -1,17 +1,17 @@
 // Global variables
 
 // search history as an empty array
-var history = [];
+var history = JSON.parse(localStorage.getItem('history')) || [];
 // weather api root url
-var queryUrl = "https://api.openweathermap.org/data/3.0/onecall?lat={lat}&lon={lon}&exclude={part}&appid={d07d922262517dc70fc0e185f07feddb}";
+var queryUrl = "https://api.openweathermap.org/data/3.0/onecall?lat={lat}&lon={lon}&exclude={part}&appid={API key}";
 // api key
-var apiKey = 'd07d922262517dc70fc0e185f07feddb';
+var apiKey = 'a923a2700d72c12cf89f294fb7005300';
 
 // DOM element references
 // search form
 var searchBtn = document.getElementById('sbtn')
 // search input
-var inputBox = document.getElementById('searchBox')
+var searchInput = document.getElementById('searchBox')
 // container/section for today's weather
 var todayEl = document.getElementById('today');
 // container/section for the forecast
@@ -102,22 +102,27 @@ function renderSearchHistory() {
     // api url
   
     // fetch, using the api url, .then that returns the response as json, .then that calls renderItems(city, data)
-    fetch(queryUrl)
-        .then((response) => response.json())
-        .then(data)
+
+        
 
 
   }
   
   function fetchCoords(search) {
-    // variable for you api url
-  
+    // variable for your api url
+    
     // fetch with your url, .then that returns the response in json, .then that does 2 things - calls appendToHistory(search), calls fetchWeather(the data)
-  
+    fetch( 'http://api.openweathermap.org/geo/1.0/reverse?lat=' + lat + '&lon=' + lon + '&appid=d07d922262517dc70fc0e185f07feddb')
+      .then(function (response) {
+        return response.JSON();
+      })
+      .then(function(data) {
+        console.log(data)
+      })
   }
   
   function handleSearchFormSubmit(e) {
-    // Don't continue if there is nothing in the search form
+    // Don't continue if there is nothing in the search form         
     if (!searchInput.value) {
       return;
     }
