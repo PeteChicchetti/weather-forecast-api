@@ -98,11 +98,15 @@ function renderSearchHistory() {
   // endpoint; then, calls functions to display current and forecast weather data.
   function fetchWeather(location) {
     // varialbles of longitude, latitude, city name - coming from location
-  
+    
     // api url
   
     // fetch, using the api url, .then that returns the response as json, .then that calls renderItems(city, data)
-  
+    fetch(queryUrl)
+        .then((response) => response.json())
+        .then(data)
+
+
   }
   
   function fetchCoords(search) {
