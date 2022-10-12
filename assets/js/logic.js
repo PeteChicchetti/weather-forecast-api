@@ -1,9 +1,9 @@
 // Global variables
 
 // search history as an empty array
-var history = JSON.parse(localStorage.getItem('history')) || [];
+var history = [];
 // weather api root url
-var queryUrl = "https://api.openweathermap.org/data/3.0/onecall?lat={lat}&lon={lon}&exclude={part}&appid={API key}";
+var queryUrl = 'https://api.openweathermap.org/data/3.0/onecall';
 // api key
 var apiKey = 'a923a2700d72c12cf89f294fb7005300';
 
@@ -49,7 +49,7 @@ function renderSearchHistory() {
   function renderCurrentWeather(city, weather) {
     // Store response data from our fetch request in variables
       // temperature, wind speed, etc.
-  
+    
   
     // document.create the elements you'll want to put this information in  
   
@@ -110,15 +110,15 @@ function renderSearchHistory() {
   
   function fetchCoords(search) {
     // variable for your api url
-    
+
     // fetch with your url, .then that returns the response in json, .then that does 2 things - calls appendToHistory(search), calls fetchWeather(the data)
-    fetch( 'http://api.openweathermap.org/geo/1.0/reverse?lat=' + lat + '&lon=' + lon + '&appid=d07d922262517dc70fc0e185f07feddb')
+    fetch(queryUrl)
       .then(function (response) {
         return response.JSON();
       })
       .then(function(data) {
         console.log(data)
-      })
+      });
   }
   
   function handleSearchFormSubmit(e) {
