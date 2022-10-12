@@ -1,14 +1,23 @@
 // Global variables
+
 // search history as an empty array
+var history = [];
 // weather api root url
+var queryUrl = "https://api.openweathermap.org/data/3.0/onecall?lat={lat}&lon={lon}&exclude={part}&appid={d07d922262517dc70fc0e185f07feddb}";
 // api key
+var apiKey = 'd07d922262517dc70fc0e185f07feddb';
 
 // DOM element references
 // search form
+var searchBtn = document.getElementById('sbtn')
 // search input
+var inputBox = document.getElementById('searchBox')
 // container/section for today's weather
-// container/section for the forecast 
+var todayEl = document.getElementById('today');
+// container/section for the forecast
+var fiveDayEl = document.getElementById('fiveDay');
 // search history container
+var historyEl = document.getElementById('history');
 
 
 // Function to display the search history list.
@@ -122,5 +131,6 @@ function renderSearchHistory() {
   }
   
   initSearchHistory();
-  // click event to run the handleFormSubmit 
+  // click event to run the handleSearchFormSubmit
+  searchBtn.addEventListener('click', handleSearchFormSubmit);
   // click event to run the handleSearchHistoryClick
