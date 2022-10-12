@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="./assets/css/style.css"/>
     <title>Weather Dashboard</title>
 </head>
@@ -12,27 +13,30 @@
     <header>
         <h1>Weather Dashboard</h1>
     </header>
+    <div class="container-fluid mw-100 vh-100">
+        <div class="row h-75 ">
 <!---- Search ---->    
-    <div id="sideBar">
-        <aside>
-            <h2>Search for a City:</h2>
-            <input id="searchBox" type="text">
-            <button id="sbtn">Search</button>
-        </aside>
-        <div id="history">
-            Test
+            <div id="sideBar" class="col-3">
+                <aside>
+                    <h2>Search for a City:</h2>
+                    <input id="searchBox" type="text">
+                    <button id="sbtn">Search</button>
+                </aside>
+                <div id="history">
+                Test
+                </div>
+            </div>
+<!---- Forecast ---->
+            <div id="forecast" class="col-8 col-md-8">
+                 <section id="today">
+
+                </section>
+                <section id="fiveDay">
+
+                </section>
+            </div>
         </div>
     </div>
-<!---- Forecast ---->
-    <div id="forecast">
-        <section id="today">
-
-        </section>
-        <section id="fiveDay">
-
-        </section>
-    </div>
-
 <!---- JavaScript ---->    
     <script src="./assets/js/logic.js"></script>
 </body>
