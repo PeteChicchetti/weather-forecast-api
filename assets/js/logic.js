@@ -3,38 +3,28 @@ var searchEl = document.getElementById('searchBox');
 var sbtnEl = document.getElementById('sbtn');
 var todayEl = document.getElementById('today');
 var historyEl = document.getElementById('history');
+var APIkey = 'd07d922262517dc70fc0e185f07feddb'
 
-
-//Function to get search results from lat and lon
-function searchRequest() {
-  var current = searchEl.value.trim();
-  var geoUrl = `http://api.openweathermap.org/geo/1.0/direct?q=${current}&limit=1&appid=d07d922262517dc70fc0e185f07feddb`;
-
-
-  //Fetch for geo api
-  fetch(geoUrl)
-    //If server is communicating then receive response else load text error to page
-    .then (function (response) {
-      console.log(response)
-      if (response.status === 200) {
-        return response.json();
-      } else {
-        todayEl.textContent = 'Error loading results'
-        return;
-      }
-    })
-    //Searching data for lat and lon else load text error to page
-    .then(function(data) {
-      console.log(data)
-      if (data.length !== 0) {
-        for (var city of data) {
-          lat = city.lat;
-          lon = city.lon;
-        }
-      }
-    })
-
-
+var getCityData = function (city) {
+  fetch("http://api.openweathermap.org/geo/1.0/direct?q=" + city + "&appid=" + APIkey)
+  .then((response) => {
+    console.log(response)
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+    return response.json();
+  })
+  .then((data) => {
+    var lat = data[0].lat;
+    var lon = data[0].lon;
+    console.log(data)
+  });
 }
 
-sbtnEl.addEventListener('click', searchRequest);
+// Adds getCityData function to retrieve the lat and lon
+sbtnEl.addEventListener('click', function (e) {
+  e.preventDefault();
+  var city = searchEl.value.trim();
+  console.log(city);
+  getCityData(city);
+});
