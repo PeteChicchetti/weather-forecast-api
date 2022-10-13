@@ -5,15 +5,50 @@ var todayEl = document.getElementById('today');
 var historyEl = document.getElementById('history');
 var APIkey = 'd07d922262517dc70fc0e185f07feddb'
 
+// Creating elements and adding to page
+function renderForecast(dailyForecast) {
+  // Created elements for page
+  var dateEl = document.createElement('h3');
+  var iconEl = document.createElement('img');
+  var divEl = document.createElement('div')
+  var tempEl = document.createElement('p');
+  var humidEl = document.createElement('p');
+  var windEl = document.createElement('p');
+  var fiveDayEl = document.createElement('p');
 
+    // Use moment to get the current time
+    var now = moment().format('MM/DD/YYYY');
+    // Gets icon from data
+    var icon = data.current.weather[0].icon;
+    var iconUrl = `http://openweathermap.org/img/wn/${icon}@2x.png`;
+
+  // Adding text content and data values to created elements
+  dateEl.textContent = now;
+  iconEl.src = iconUrl;
+  tempEl.textContent = 'Temperature: ' + data.current.temp;
+  humidEl.textContent = 'Humidity: ' + data.current.humidity;
+  windEl.textContent = 'Wind Speed: ' + data.current.wind_speed;
+  fiveDayEl.textContent = '5 Day Forecast: ';
+  
+  //added class to style using CSS
+  divEl.className = 'current-list';
+}
+
+
+// Function to push city and data info to functions for adding to page
+function renderItems(city, data) {
+  renderCurrentWeather(city, data.list[0]);
+  renderForecast(dailyForecast);
+}
 
 // Function to retrieve 5 day forecast based on geo coordinates from location in search
 function getFiveDayForecast(lat, lon) {
   fetch("http://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + lon + "&units=imperial&appid=" + APIkey)
   .then((response) => response.json())
   .then((data) => {
+    var dailyForecast = data.list;
     console.log(data.list);
-    renderItems(city, data);
+    renderItems(city, dailyForecast);
   });
 }
 
