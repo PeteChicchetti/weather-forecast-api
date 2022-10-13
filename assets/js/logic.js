@@ -16,14 +16,23 @@ function searchRequest() {
     //If server is communicating then receive response else load text error to page
     .then (function (response) {
       console.log(response)
-      if (response.ok) {
+      if (response.status === 200) {
         return response.json();
       } else {
         todayEl.textContent = 'Error loading results'
         return;
       }
     })
-    
+    //Searching data for lat and lon else load text error to page
+    .then(function(data) {
+      console.log(data)
+      if (data.length !== 0) {
+        for (var city of data) {
+          lat = city.lat;
+          lon = city.lon;
+        }
+      }
+    })
 
 
 }
