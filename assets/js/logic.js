@@ -6,7 +6,7 @@ var historyEl = document.getElementById('history');
 var APIkey = 'd07d922262517dc70fc0e185f07feddb'
 
 // Creating elements and adding to page
-function renderForecast(dailyForecast) {
+function renderForecast(data) {
   // Created elements for page
   var dateEl = document.createElement('h3');
   var iconEl = document.createElement('img');
@@ -19,26 +19,25 @@ function renderForecast(dailyForecast) {
     // Use moment to get the current time
     var now = moment().format('MM/DD/YYYY');
     // Gets icon from data
-    var icon = data.current.weather[0].icon;
-    var iconUrl = `http://openweathermap.org/img/wn/${icon}@2x.png`;
+    var icon = data.list[0].weather.icon;
 
   // Adding text content and data values to created elements
   dateEl.textContent = now;
   iconEl.src = iconUrl;
-  tempEl.textContent = 'Temperature: ' + data.current.temp;
-  humidEl.textContent = 'Humidity: ' + data.current.humidity;
-  windEl.textContent = 'Wind Speed: ' + data.current.wind_speed;
+  tempEl.textContent = 'Temperature: ' ; 
+  humidEl.textContent = 'Humidity: ' ; 
+  windEl.textContent = 'Wind Speed: ' ;
   fiveDayEl.textContent = '5 Day Forecast: ';
-  
+
   //added class to style using CSS
   divEl.className = 'current-list';
 }
 
 
 // Function to push city and data info to functions for adding to page
-function renderItems(city, data) {
-  renderCurrentWeather(city, data.list[0]);
-  renderForecast(dailyForecast);
+function renderItems(data) {
+  // renderCurrentWeather(city, data.list[0]);
+  renderForecast(data);
 }
 
 // Function to retrieve 5 day forecast based on geo coordinates from location in search
@@ -47,8 +46,10 @@ function getFiveDayForecast(lat, lon) {
   .then((response) => response.json())
   .then((data) => {
     var dailyForecast = data.list;
-    console.log(data.list);
-    renderItems(city, dailyForecast);
+    var city = data.city.name;
+    console.log(city);
+    console.log(data);
+    renderItems(data);
   });
 }
 
@@ -76,7 +77,7 @@ function getCityData(city) {
     return response.json();
   })
   .then((data) => {
-    var city = data[0].name;
+    // var city = data[0].name;
     var lat = data[0].lat;
     var lon = data[0].lon;
     // console.log(data)
