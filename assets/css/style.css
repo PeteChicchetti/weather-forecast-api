@@ -81,6 +81,10 @@ button:hover {
 }
 
 
+#subtitle {
+    font-size: 125%;
+    font-weight: bold;
+}
 
 .card {
     border: 2px solid black;

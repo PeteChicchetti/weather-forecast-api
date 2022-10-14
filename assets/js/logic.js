@@ -13,7 +13,7 @@ function renderForecast(data3) {
   var tempEl = document.createElement('p');
   var humidEl = document.createElement('p');
   var windEl = document.createElement('p');
-  var fiveDayEl = document.createElement('p');
+  var divEl = document.createElement('div')
 
     // Use moment to get the current time
     var now = moment().format('MM/DD/YYYY');
@@ -29,10 +29,15 @@ function renderForecast(data3) {
   tempEl.textContent = 'Temp: ' + data3.list[0].main.temp; 
   humidEl.textContent = 'Humidity: ' + data3.list[0].main.humidity; 
   windEl.textContent = 'Wind: ' + data3.list[0].wind.speed;
-  fiveDayEl.textContent = '5 Day Forecast: ';
 
-  var cardEl = document.querySelector('.card');
-  cardEl.append(dateEl, iconEl, tempEl, humidEl, windEl);
+  // Class for CSS
+  divEl.className = 'card';
+
+  // Append elements
+  var cardEl = document.querySelector('#fiveDay');
+  divEl.append(dateEl, tempEl, humidEl, windEl);
+  cardEl.append(divEl);
+
 }
 
 
