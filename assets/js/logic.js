@@ -19,17 +19,19 @@ function renderForecast(data3) {
     // Use moment to get the current time
     var now = moment().format('MM/DD/YYYY');
     // Gets icon from data
-    var icon = data3.list[0].weather.icon;
+    // var icon = data3.weather[0].icon;
+    // var iconUrl = "https://openweathermap.org/img/wn/" + icon + ".png";
 
   // // Adding text content and data values to created elements
   dateEl.textContent = now;
-  tempEl.textContent = 'Temperature: ' ; 
-  humidEl.textContent = 'Humidity: ' ; 
-  windEl.textContent = 'Wind Speed: ' ;
+  // iconEl.src = iconUrl;
+  tempEl.textContent = 'Temperature: '; 
+  humidEl.textContent = 'Humidity: '; 
+  windEl.textContent = 'Wind Speed: ';
   fiveDayEl.textContent = '5 Day Forecast: ';
 
-  //added class to style using CSS
-  divEl.className = 'current-list';
+  cardEl = document.querySelector('card');
+  cardEl.appendChild(dateEl, tempEl, humidEl, windEl);
 }
 
 
@@ -44,10 +46,10 @@ function getFiveDayForecast(lat, lon) {
   fetch("http://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + lon + "&units=imperial&appid=" + APIkey)
   .then((response) => response.json())
   .then((data3) => {
-    var dailyForecast = data3.list;
+    // var dailyForecast = data3.list;
     var city = data3.city.name;
-    console.log(city);
-    console.log(data3);
+    // console.log(city);
+    // console.log(data3);
     renderForecast(data3);
   });
 }

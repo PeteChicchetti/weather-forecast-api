@@ -71,3 +71,24 @@ button:hover {
     width: 100%;
     height: 225px;
 }
+
+
+
+
+
+
+#fiveDay {
+    display: flex;
+    justify-content: space-evenly;
+    direction: column;
+}
+
+
+
+.card {
+    border: 2px solid black;
+    background-color: rgb(68, 123, 224);
+    width: 150px;
+    height: 175px;
+    margin: 20px;
+}
