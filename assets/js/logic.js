@@ -10,7 +10,6 @@ function renderForecast(data3) {
   // Created elements for page
   var dateEl = document.createElement('h3');
   var iconEl = document.createElement('img');
-  var divEl = document.createElement('div')
   var tempEl = document.createElement('p');
   var humidEl = document.createElement('p');
   var windEl = document.createElement('p');
@@ -22,16 +21,18 @@ function renderForecast(data3) {
     // var icon = data3.weather[0].icon;
     // var iconUrl = "https://openweathermap.org/img/wn/" + icon + ".png";
 
+    console.log(data3)
+
   // // Adding text content and data values to created elements
   dateEl.textContent = now;
   // iconEl.src = iconUrl;
-  tempEl.textContent = 'Temperature: '; 
-  humidEl.textContent = 'Humidity: '; 
-  windEl.textContent = 'Wind Speed: ';
+  tempEl.textContent = 'Temp: ' + data3.list[0].main.temp; 
+  humidEl.textContent = 'Humidity: ' + data3.list[0].main.humidity; 
+  windEl.textContent = 'Wind: ' + data3.list[0].wind.speed;
   fiveDayEl.textContent = '5 Day Forecast: ';
 
-  cardEl = document.querySelector('card');
-  cardEl.appendChild(dateEl, tempEl, humidEl, windEl);
+  var cardEl = document.querySelector('.card');
+  cardEl.append(dateEl, iconEl, tempEl, humidEl, windEl);
 }
 
 

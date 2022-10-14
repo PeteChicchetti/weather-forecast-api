@@ -73,10 +73,7 @@ button:hover {
 }
 
 
-
-
-
-
+/*---- 5 Day Forecast ----*/
 #fiveDay {
     display: flex;
     justify-content: space-evenly;
@@ -91,4 +88,13 @@ button:hover {
     width: 150px;
     height: 175px;
     margin: 20px;
+}
+
+h3 {
+    font-size: 120%;
+}
+
+p {
+    font-size: 100%;
+    margin: 0px;
 }
