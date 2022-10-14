@@ -6,7 +6,7 @@ var historyEl = document.getElementById('history');
 var APIkey = 'd07d922262517dc70fc0e185f07feddb'
 
 // Creating elements and adding to page
-function renderForecast(data) {
+function renderForecast(data3) {
   // Created elements for page
   var dateEl = document.createElement('h3');
   var iconEl = document.createElement('img');
@@ -19,11 +19,10 @@ function renderForecast(data) {
     // Use moment to get the current time
     var now = moment().format('MM/DD/YYYY');
     // Gets icon from data
-    var icon = data.list[0].weather.icon;
+    var icon = data3.list[0].weather.icon;
 
-  // Adding text content and data values to created elements
+  // // Adding text content and data values to created elements
   dateEl.textContent = now;
-  iconEl.src = iconUrl;
   tempEl.textContent = 'Temperature: ' ; 
   humidEl.textContent = 'Humidity: ' ; 
   windEl.textContent = 'Wind Speed: ' ;
@@ -35,21 +34,21 @@ function renderForecast(data) {
 
 
 // Function to push city and data info to functions for adding to page
-function renderItems(data) {
-  // renderCurrentWeather(city, data.list[0]);
-  renderForecast(data);
-}
+// function renderItems(data3) {
+//   // renderCurrentWeather(city, data.list[0]);
+//   renderForecast(data3);
+// }
 
 // Function to retrieve 5 day forecast based on geo coordinates from location in search
 function getFiveDayForecast(lat, lon) {
   fetch("http://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + lon + "&units=imperial&appid=" + APIkey)
   .then((response) => response.json())
-  .then((data) => {
-    var dailyForecast = data.list;
-    var city = data.city.name;
+  .then((data3) => {
+    var dailyForecast = data3.list;
+    var city = data3.city.name;
     console.log(city);
-    console.log(data);
-    renderItems(data);
+    console.log(data3);
+    renderForecast(data3);
   });
 }
 
@@ -59,7 +58,7 @@ function getWeather(name, lat, lon) {
     // Fetch using the api url, .then that return the response as json, .then that calls renderItems(city, data)
     fetch("https://api.openweathermap.org/data/2.5/weather?lat=" + lat + "&lon=" + lon + "&units=imperial&appid=" + APIkey)
     .then((response) => response.json())
-    .then((data) => {
+    .then((data2) => {
       // console.log(data);
       getFiveDayForecast(lat, lon);
     });
@@ -76,10 +75,10 @@ function getCityData(city) {
     }
     return response.json();
   })
-  .then((data) => {
+  .then((data1) => {
     // var city = data[0].name;
-    var lat = data[0].lat;
-    var lon = data[0].lon;
+    var lat = data1[0].lat;
+    var lon = data1[0].lon;
     // console.log(data)
     getWeather(city, lat, lon);
   });
