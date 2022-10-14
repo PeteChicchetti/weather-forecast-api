@@ -72,6 +72,21 @@ button:hover {
     height: 225px;
 }
 
+h3 {
+    font-size: 250%;
+    margin: 0px;
+    padding-left: 5px;
+
+}
+
+h4 {
+    padding-left: 5px;
+}
+
+#today>p{
+    font-weight: bold;
+    padding-left: 5px;
+}
 
 /*---- 5 Day Forecast ----*/
 #fiveDay {
@@ -94,7 +109,7 @@ button:hover {
     margin: 20px;
 }
 
-h4 {
+h5 {
     font-size: 120%;
 }
 

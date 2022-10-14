@@ -9,7 +9,7 @@ var APIkey = 'd07d922262517dc70fc0e185f07feddb';
 // Creating elements and adding to page
 function renderForecast(data3) {
   // Created elements for page
-  var dateEl = document.createElement('h4');
+  var dateEl = document.createElement('h5');
   var iconEl = document.createElement('img');
   var tempEl = document.createElement('p');
   var humidEl = document.createElement('p');
@@ -44,7 +44,7 @@ function renderForecast(data3) {
 
 function renderCurrentWeather (data2) {
   var nameEl = document.createElement('h3');
-  var dateEl = document.createElement('h3');
+  var dateEl = document.createElement('h4');
   var tempEl = document.createElement('p');
   var humidEl = document.createElement('p');
   var windEl = document.createElement('p');
