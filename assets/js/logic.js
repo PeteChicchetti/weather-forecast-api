@@ -104,7 +104,7 @@ function renderCurrentWeather(city, data2) {
 
 // Function to retrieve 5 day forecast based on geo coordinates from location in search
 function getFiveDayForecast(lat, lon) {
-  fetch("http://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + lon + "&units=imperial&appid=" + APIkey)
+  fetch("https://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + lon + "&units=imperial&appid=" + APIkey)
   .then((response) => response.json())
   .then((data3) => {
     // var dailyForecast = data3.list;
@@ -131,7 +131,7 @@ function getWeather(city, lat, lon) {
 
 // Function to get response from geo and plug in city from search to receive lat and lon on data return
 function getCityData(city) {
-  fetch("http://api.openweathermap.org/geo/1.0/direct?q=" + city + "&appid=" + APIkey)
+  fetch("https://api.openweathermap.org/geo/1.0/direct?q=" + city + "&appid=" + APIkey)
   .then((response) => {
     // console.log(response)
     if (!response.ok) {
