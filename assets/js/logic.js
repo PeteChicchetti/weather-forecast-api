@@ -58,28 +58,49 @@ function renderForecast(data3) {
   }
 }
 
+// Function to display the CURRENT weather data fetched from OpenWeather api.
+function renderCurrentWeather(city, data2) {
+  console.log(city, data2);
+  // Store response data from our fetch request in variables
+  // temperature, wind speed, etc.
+  var currentTemp = data2.main.temp;
+  var humidity = data2.main.humidity;
+  var windSpeed = data2.wind.speed;
+  var iconCurrent = data2.weather[0].icon;
 
-function renderCurrentWeather (data2) {
-  var nameEl = document.createElement('h3');
-  var dateEl = document.createElement('h4');
-  var tempEl = document.createElement('p');
-  var humidEl = document.createElement('p');
-  var windEl = document.createElement('p');
+  // document.create the elements you'll want to put this information in  
+  todayEl.textContent = ""
+  todayEl.setAttribute("class", "m-3 border col-10 text-center")
+  var divCityHeader = document.createElement("div")
+  var headerCityDate = document.createElement("h5");
+  var currentDate = moment().format("MM/DD/YYYY");
+  var imageIcon = document.createElement("img");
+  imageIcon.setAttribute("src", "")
+  imageIcon.setAttribute("src", "https://openweathermap.org/img/wn/" + iconCurrent + "@2x.png")
+  headerCityDate.textContent = city + "(" + currentDate + ")";
 
-  var today = moment().format('MM/DD/YYYY');
-  console.log(data2);
-  nameEl.textContent = data2.name;
-  dateEl.textContent = today;
-  // iconEl.src = iconUrl;
-  tempEl.textContent = 'Temp: ' + data2.main.temp; 
-  humidEl.textContent = 'Humidity: ' + data2.main.humidity; 
-  windEl.textContent = 'Wind: ' + data2.wind.speed;
+  divCityHeader.appendChild(headerCityDate)
+  divCityHeader.appendChild(imageIcon)
+  todayEl.appendChild(divCityHeader)
 
-  var cardEl = document.querySelector('#today');
-  cardEl.append(nameEl, dateEl, tempEl, humidEl, windEl);
-}
+  var currentDiv = document.createElement("div")
+  var currentTempEl = document.createElement("p");
+  var humidityEl = document.createElement("p");
+  var windSpeedEl = document.createElement("p");
+  // append those elements somewhere
+
+  currentDiv.appendChild(currentTempEl);
+  currentDiv.appendChild(humidityEl);
+  currentDiv.appendChild(windSpeedEl);
+
+  todayEl.appendChild(currentDiv);
+  // give them their appropriate content
+  currentTempEl.textContent = "Temperature: " + currentTemp + "°F";
+  humidityEl.textContent = "Humidity: " + humidity + "%";
+  windSpeedEl.textContent = "Wind Speed: " + windSpeed + " MPH";
 
 
+};
 
 // Function to retrieve 5 day forecast based on geo coordinates from location in search
 function getFiveDayForecast(lat, lon) {
@@ -95,15 +116,15 @@ function getFiveDayForecast(lat, lon) {
 }
 
 // Function to retrieve weather based on geo coordinates from location in search
-function getWeather(name, lat, lon) {
-  console.log(name, lat, lon);
+function getWeather(city, lat, lon) {
+  console.log(city, lat, lon);
     // Fetch using the api url, .then that return the response as json, .then that calls renderItems(city, data)
     fetch("https://api.openweathermap.org/data/2.5/weather?lat=" + lat + "&lon=" + lon + "&units=imperial&appid=" + APIkey)
     .then((response) => response.json())
     .then((data2) => {
       // console.log(data);
       getFiveDayForecast(lat, lon);
-      renderCurrentWeather(data2);
+      renderCurrentWeather(city, data2);
     });
 
 }
