@@ -3,20 +3,22 @@ var searchEl = document.getElementById('searchBox');
 var sbtnEl = document.getElementById('sbtn');
 var todayEl = document.getElementById('today');
 var historyEl = document.getElementById('history');
-var APIkey = 'd07d922262517dc70fc0e185f07feddb'
+var APIkey = 'd07d922262517dc70fc0e185f07feddb';
+
 
 // Creating elements and adding to page
 function renderForecast(data3) {
   // Created elements for page
-  var dateEl = document.createElement('h3');
+  var dateEl = document.createElement('h4');
   var iconEl = document.createElement('img');
   var tempEl = document.createElement('p');
   var humidEl = document.createElement('p');
   var windEl = document.createElement('p');
-  var divEl = document.createElement('div')
+  var divEl = document.createElement('div');
 
     // Use moment to get the current time
-    var now = moment().format('MM/DD/YYYY');
+    var today = moment().format('MM/DD/YYYY');
+    var tomorrow = moment(today).add(1,'days').format('MM/DD/YYYY');
     // Gets icon from data
     // var icon = data3.weather[0].icon;
     // var iconUrl = "https://openweathermap.org/img/wn/" + icon + ".png";
@@ -24,7 +26,7 @@ function renderForecast(data3) {
     console.log(data3)
 
   // // Adding text content and data values to created elements
-  dateEl.textContent = now;
+  dateEl.textContent = tomorrow;
   // iconEl.src = iconUrl;
   tempEl.textContent = 'Temp: ' + data3.list[0].main.temp; 
   humidEl.textContent = 'Humidity: ' + data3.list[0].main.humidity; 
@@ -40,12 +42,27 @@ function renderForecast(data3) {
 
 }
 
+function renderCurrentWeather (data2) {
+  var nameEl = document.createElement('h3');
+  var dateEl = document.createElement('h3');
+  var tempEl = document.createElement('p');
+  var humidEl = document.createElement('p');
+  var windEl = document.createElement('p');
 
-// Function to push city and data info to functions for adding to page
-// function renderItems(data3) {
-//   // renderCurrentWeather(city, data.list[0]);
-//   renderForecast(data3);
-// }
+  var today = moment().format('MM/DD/YYYY');
+  console.log(data2);
+  nameEl.textContent = data2.name;
+  dateEl.textContent = today;
+  // iconEl.src = iconUrl;
+  tempEl.textContent = 'Temp: ' + data2.main.temp; 
+  humidEl.textContent = 'Humidity: ' + data2.main.humidity; 
+  windEl.textContent = 'Wind: ' + data2.wind.speed;
+
+  var cardEl = document.querySelector('#today');
+  cardEl.append(nameEl, dateEl, tempEl, humidEl, windEl);
+}
+
+
 
 // Function to retrieve 5 day forecast based on geo coordinates from location in search
 function getFiveDayForecast(lat, lon) {
@@ -69,6 +86,7 @@ function getWeather(name, lat, lon) {
     .then((data2) => {
       // console.log(data);
       getFiveDayForecast(lat, lon);
+      renderCurrentWeather(data2);
     });
 
 }
